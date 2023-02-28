@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, StatusBar} from 'react-native';
+import {StyleSheet, StatusBar} from 'react-native';
 import Favorite from './screens/favorites';
 import ProductsListing from './screens/producstListing';
 import ProductsDetails from './screens/productsDetails';
@@ -35,7 +35,15 @@ function App(): JSX.Element {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="default" />
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#fff',
+              },
+              contentStyle: {
+                backgroundColor: '#643a71',
+              },
+            }}>
             <Stack.Screen
               options={{headerShown: false}}
               name="BottomsTab"
@@ -43,7 +51,7 @@ function App(): JSX.Element {
             />
             <Stack.Screen
               options={{title: 'Product Details'}}
-              name="Product Details"
+              name="productDetails"
               component={ProductsDetails}
             />
           </Stack.Navigator>
