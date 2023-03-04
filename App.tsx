@@ -16,12 +16,12 @@ function BottomTabs(): JSX.Element {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        options={{title: 'Products List'}}
+        options={{title: 'Products List App'}}
         name="ProductsListing"
         component={ProductsListing}
       />
       <Tab.Screen
-        options={{title: 'Favorite'}}
+        options={{title: 'Favorites'}}
         name="Favorite"
         component={Favorite}
       />
