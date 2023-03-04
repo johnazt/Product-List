@@ -35,9 +35,7 @@ const ProductContext = ({children}) => {
       const data = await fetch('https://dummyjson.com/products');
       const result = await data.json();
       if (result) {
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        setLoading(false);
         setProducts(result.products);
       }
     }

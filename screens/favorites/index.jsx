@@ -5,7 +5,6 @@ import {Context} from '../../context';
 
 export default function Favorite() {
   const {favoriteItems, handleRemoveFavorite} = useContext(Context);
-  console.log(favoriteItems);
 
   if (!favoriteItems.length) {
     return (
