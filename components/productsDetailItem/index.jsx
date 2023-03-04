@@ -5,8 +5,8 @@ export default function ProductsDetailItem({productDetailsData}) {
     <View style={styles.container}>
       <Text style={styles.textStyle}>{productDetailsData.title}</Text>
       <Text style={styles.textStyle}>{productDetailsData.description}</Text>
-      <Text style={styles.textStyle}>{productDetailsData.price}</Text>
-      <Text style={styles.textStyle}>{productDetailsData.rating}</Text>
+      <Text style={styles.textStyle}>${productDetailsData.price}</Text>
+      <Text style={styles.textStyle}>⭐️{productDetailsData.rating}</Text>
       <Text style={styles.textStyle}>{productDetailsData.category}</Text>
     </View>
   );

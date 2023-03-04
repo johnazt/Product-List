@@ -14,10 +14,10 @@ import ProductsDetailItem from '../../components/productsDetailItem';
 import {Context} from '../../context';
 
 export default function ProductsDetails() {
-  const {addToFavorite} = useContext(Context);
+  const {addToFavorite, favoriteItems} = useContext(Context);
   const route = useRoute();
-  const navigation = useNavigation();
   const productId = route.params.productId;
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [reason, setReason] = useState('');
@@ -38,11 +38,24 @@ export default function ProductsDetails() {
     getItemDetailsData();
   }, []);
 
+  const currentItemIsPresentInFavorite =
+    favoriteItems && favoriteItems.length > 0
+      ? favoriteItems.filter(item => item.id === productId)
+      : false;
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => {
         return (
-          <Button onPress={() => setModalVisible(true)} title="Add favorites" />
+          <Button
+            onPress={() => setModalVisible(true)}
+            title={
+              currentItemIsPresentInFavorite &&
+              currentItemIsPresentInFavorite.length > 0
+                ? 'Update Favorite'
+                : 'Add Favorites'
+            }
+          />
         );
       },
     });
@@ -57,6 +70,7 @@ export default function ProductsDetails() {
   const handleTextInput = enteredText => {
     setReason(enteredText);
   };
+
   return (
     <View>
       <ProductsDetailItem productDetailsData={productDetailsData} />
@@ -73,6 +87,7 @@ export default function ProductsDetails() {
             <TextInput
               style={styles.textInput}
               placeholder="Why do you like this product?"
+              maxLength={40}
               onChangeText={handleTextInput}
               value={reason}
             />
@@ -83,7 +98,12 @@ export default function ProductsDetails() {
                   addToFavorite(productId, reason);
                   setModalVisible(!modalVisible);
                 }}>
-                <Text style={styles.textStyle}>Add</Text>
+                <Text style={styles.textStyle}>
+                  {currentItemIsPresentInFavorite &&
+                  currentItemIsPresentInFavorite.length > 0
+                    ? 'Update'
+                    : 'Add'}
+                </Text>
               </Pressable>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
